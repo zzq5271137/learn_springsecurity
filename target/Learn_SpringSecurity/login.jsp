@@ -14,7 +14,10 @@
 
 <h1>登录页面</h1>
 
-<%-- 登录的请求地址必须叫login(必须和配置文件中配置的一样), 用户名和密码输入框的name必须叫username和password --%>
+<%--
+    登录的请求地址必须叫login(必须和配置文件中配置的一样);
+    用户名和密码输入框的name必须叫username和password(必须和配置文件中配置的一样);
+--%>
 <form action="login" method="post">
     <table>
         <tr>

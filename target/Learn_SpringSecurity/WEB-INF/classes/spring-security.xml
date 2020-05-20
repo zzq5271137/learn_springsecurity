@@ -27,20 +27,30 @@
 
         <!--
             配置具体的页面跳转;
-            login-page: 指定登录页面,
-            login-processing-url: 登录请求路径,
-            default-target-url: 登录成功后进入的页面,
+            login-page: 指定登录页面, 以/开始;
+            login-processing-url: 登录请求路径(提交登录请求/进行认证的请求的路径), 默认值"/login";
+            default-target-url: 登录成功后进入的页面;
             authentication-failure-url: 登录失败后进入的页面;
+
+            逻辑跟Shiro差不多, 当有请求过来时, 会看这个请求是不是login-processing-url配置的请求路径:
+            1. 如果是:
+               就会直接去做认证(即进行用户名密码校验); 认证成功, 则跳转到default-target-url配置的页面,
+               认证失败, 则跳转到authentication-failure-url配置的页面; 这也是为什么,
+               我们的login.jsp中的登录表格的请求路径要写成login-processing-url配置的路径;
+            2. 如果不是, 会看这个用户有没有认证过:
+               a). 如果没有认证过, 就会跳转到login-page配置的页面, 让用户去输入用户名密码;
+               b). 如果认证过了, 就会执行本来的那个请求(即放行);
         -->
-        <security:form-login
-                login-page="/login.jsp"
-                login-processing-url="/login"
-                always-use-default-target="true"
-                default-target-url="/success.jsp"
-                authentication-failure-url="/error.jsp"/>
+        <security:form-login username-parameter="username"
+                             password-parameter="password"
+                             login-page="/login.jsp"
+                             login-processing-url="/login"
+                             always-use-default-target="true"
+                             default-target-url="/success.jsp"
+                             authentication-failure-url="/error.jsp"/>
 
         <!--
-            配置退出;
+            配置退出/注销;
             invalidate-session: 是否刷新session,
             logout-url: 退出请求地址,
             logout-success-url: 退出成功后访问的页面;
@@ -49,11 +59,11 @@
                          logout-url="/logout"
                          logout-success-url="/login.html"/>
 
-        <!-- 关闭跨域请求 -->
+        <!-- 不使用csrf的校验(关闭跨域请求) -->
         <security:csrf disabled="true"/>
     </security:http>
 
-    <!-- 配置认证信息 -->
+    <!-- 配置认证管理器 -->
     <security:authentication-manager>
         <!-- 认证信息的提供者 -->
         <security:authentication-provider>
@@ -63,6 +73,7 @@
                     用户信息, 这里是写死的账号密码;
                     noop: 不使用加密;
                     authorities: 指定用户认证的角色;
+                    真实场景中, 需要去数据库中取出用户名密码进行认证;
                 -->
                 <security:user name="admin" password="{noop}admin" authorities="ROLE_USER"/>
             </security:user-service>
