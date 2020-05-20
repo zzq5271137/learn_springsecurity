@@ -15,6 +15,9 @@
   <component name="CodeInsightWorkspaceSettings">
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
     <exe-path />
@@ -42,6 +45,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1c9Tf35jDKjvYk2BNJ2NkMZBWtX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -316,7 +320,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589939908410</updated>
-      <workItem from="1589939909882" duration="3093000" />
+      <workItem from="1589939909882" duration="3352000" />
     </task>
     <servers />
   </component>
